@@ -1,11 +1,14 @@
-﻿using System.Data.SqlClient;
-
+﻿using System;
+using System.Data.SqlClient;
+using AnyCompany.Repositories;
 namespace AnyCompany
 {
-    internal class OrderRepository
+    internal class OrderAccess : IDataAccess<Order>
     {
+        //should be moved to config file
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
+        //can further be refactored to use command query pattern
         public void Save(Order order)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
@@ -20,6 +23,11 @@ namespace AnyCompany
             command.ExecuteNonQuery();
 
             connection.Close();
+        }
+
+        public Order Load(int orderId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -40,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
+    <Compile Include="Utility\Constants.cs" />
+    <Compile Include="Utility\Vat.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="Repositories\CustomerAccess.cs" />
+    <Compile Include="Repositories\Interface\IDataAccess.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Repositories\OrderAccess.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

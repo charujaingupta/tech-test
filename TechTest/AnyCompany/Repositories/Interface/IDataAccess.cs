@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnyCompany.Tests
+namespace AnyCompany.Repositories
 {
-    public class Class1
+    public interface IDataAccess<T>
     {
+        void Save(T val);
+
+        T Load(int id);
     }
 }

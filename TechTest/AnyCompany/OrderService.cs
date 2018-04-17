@@ -1,22 +1,30 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.Repositories;
+using AnyCompany.Utility;
+namespace AnyCompany
 {
-    public class OrderService
+    public class OrderService : IService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+
+        IDataAccess<Order> _orderRepository;
+        IDataAccess<Customer> _customerRepository;
+
+        public OrderService(IDataAccess<Order> orderRepository, IDataAccess<Customer> custRepository)
+        {
+            _orderRepository = orderRepository;
+            _customerRepository = custRepository;
+        }
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            if (order.Amount == 0) return false;
 
-            if (order.Amount == 0)
-                return false;
+            Customer customer = _customerRepository.Load(customerId);
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+            if (customer == null) return false;
 
-            orderRepository.Save(order);
+            order.VAT = Vat.Get(customer.Country);
+
+            _orderRepository.Save(order);
 
             return true;
         }
